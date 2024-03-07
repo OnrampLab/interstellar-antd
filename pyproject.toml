@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "interstellar-antd"
+version = "0.1.0"
+description = "A ant design component for pytest based on interstellar framework."
+authors = ["Onramplab Dev <dev@onramplab.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+interstellar = {git = "https://github.com/OnrampLab/interstellar.git"}
+selenium = "^4.18.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+pytest-xdist = "^3.5.0"
