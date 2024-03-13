@@ -4,7 +4,7 @@ from interstellar.framework import Element
 
 
 class Modal(Element):
-    XPATH_CURRENT = '//div[@class="ant-modal"]'
+    XPATH_CURRENT = '//div[contains(@class, "ant-modal")]'
 
     XPATH_CLOSE_BUTTON = '//button[contains(@class, "ant-modal-close")]'
 
