@@ -1,8 +1,7 @@
 from urllib.parse import urlparse
 
 from selenium.webdriver.common.by import By
-
-from interstellar.framework import Element
+from transstellar.framework import Element
 
 
 class Row(Element):

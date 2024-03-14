@@ -1,7 +1,7 @@
 import time
 from urllib.parse import urlparse
 
-from interstellar.framework import BasePage
+from transstellar.framework import BasePage
 
 from .message import Message
 

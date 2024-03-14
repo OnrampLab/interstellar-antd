@@ -167,7 +167,7 @@ files = [
 dev = ["black (==23.3.0)", "build (==0.10.0)", "check-manifest (==0.49)", "click (==8.1.3)", "coverage (==7.2.7)", "exceptiongroup (==1.1.1)", "iniconfig (==2.0.0)", "mypy (==1.4.1)", "mypy-extensions (==1.0.0)", "packaging (==23.1)", "pathspec (==0.11.1)", "platformdirs (==3.8.0)", "pluggy (==1.2.0)", "pyproject-hooks (==1.0.0)", "pytest (==7.4.0)", "pytest-cov (==4.1.0)", "tomli (==2.0.1)", "typing-extensions (==4.7.0)"]
 
 [[package]]
-name = "interstellar"
+name = "transstellar"
 version = "0.1.0"
 description = "A pytest framework"
 optional = false
@@ -184,7 +184,7 @@ selenium = "^4.18.0"
 
 [package.source]
 type = "git"
-url = "https://github.com/OnrampLab/interstellar.git"
+url = "https://github.com/OnrampLab/transstellar.git"
 reference = "HEAD"
 resolved_reference = "019b5ed5c131d73e85d37d14907bc128f0c162d0"
 

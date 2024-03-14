@@ -1,3 +1,3 @@
-# interstellar-antd
+# transstellar-antd
 
-A ant design component for pytest based on interstellar framework.
+A ant design component for pytest based on transstellar framework.

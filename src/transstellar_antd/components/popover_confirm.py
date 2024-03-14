@@ -1,6 +1,6 @@
 from urllib.parse import urlparse
 
-from interstellar.framework import Element
+from transstellar.framework import Element
 
 from .button import Button
 

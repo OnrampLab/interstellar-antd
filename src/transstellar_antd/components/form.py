@@ -1,6 +1,6 @@
 from urllib.parse import urlparse
 
-from interstellar.framework import Element
+from transstellar.framework import Element
 
 from .checkbox import Checkbox
 from .form_item import FormItem

@@ -1,8 +1,8 @@
 from typing import List, Union
 from urllib.parse import urlparse
 
-from interstellar.framework import Element
 from selenium.webdriver.common.by import By
+from transstellar.framework import Element
 
 from .row import Row
 
