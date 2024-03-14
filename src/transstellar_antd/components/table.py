@@ -11,6 +11,7 @@ class Table(Element):
     XPATH_CURRENT = '//div[contains(@class, "ant-table")]'
     SELECTOR_TABLE_HEADER = "thead.ant-table-thead th.ant-table-cell"
     SELECTOR_ROW = "tbody.ant-table-tbody tr.ant-table-row"
+    ROW_CLASS = Row
 
     rows: List[Row]
     column_titles = {}
@@ -24,7 +25,7 @@ class Table(Element):
         for index, column in enumerate(header_columns):
             self.column_titles[column.text.strip()] = index
 
-        self.rows = self.find_elements(Row)
+        self.rows = self.find_elements(self.ROW_CLASS)
 
         for row in self.rows:
             row.set_column_titles(self.column_titles)

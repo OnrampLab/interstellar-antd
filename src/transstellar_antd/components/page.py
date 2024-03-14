@@ -7,9 +7,10 @@ from .message import Message
 
 
 class Page(BasePage):
+    MESSAGE_CLASS = Message
 
     def get_ant_message(self) -> str:
-        message_element: Message = self.find_global_element(Message)
+        message_element: Message = self.find_global_element(self.MESSAGE_CLASS)
 
         return message_element.get_content()
 
