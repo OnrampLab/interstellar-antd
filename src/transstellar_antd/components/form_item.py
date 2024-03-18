@@ -8,7 +8,7 @@ class FormItem(Element):
 
     def find_form_control(self, element_class):
         self.logger.info(
-            f"finding form control element with label: {self.label}, element: {element_class.__class__}"
+            f"finding form control element with label: {self.label}, element: {element_class.__name__}"
         )
 
         return self.find_element(element_class)
