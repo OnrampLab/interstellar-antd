@@ -2,5 +2,15 @@ version: '2'
 services:
   app:
     build: .
+    depends_on:
+      - selenium
     volumes:
       - .:/project
+
+  selenium:
+    image: selenium/standalone-chrome
+    environment:
+      - VNC_NO_PASSWORD=1 # Don't ask for a password
+      - SE_NODE_SESSION_TIMEOUT=1000
+    ports:
+      - ${SELENIUM_PORT:-7900}:7900
