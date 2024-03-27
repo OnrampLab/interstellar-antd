@@ -6,9 +6,10 @@ authors = ["Onramplab Dev <dev@onramplab.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-transstellar = "^0.2"
-selenium = "^4.18.0"
+transstellar = "^1.1.0"
+selenium = "^4.18.1"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.0.0"
+pytest = "^8.1.1"
 pytest-xdist = "^3.5.0"
+poetry-plugin-up = "^0.7.1"
