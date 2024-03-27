@@ -1,5 +1,3 @@
-from urllib.parse import urlparse
-
 from transstellar.framework import Element
 
 

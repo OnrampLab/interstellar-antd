@@ -1,5 +1,3 @@
-from urllib.parse import urlparse
-
 from selenium.webdriver.common.by import By
 from transstellar.framework import Element
 
@@ -11,9 +9,6 @@ class Row(Element):
 
     def set_column_titles(self, column_titles):
         self.column_titles = column_titles
-
-    def get_button_xpath(self, label):
-        return f'//button[contains(@class, "ant-btn") and span/text()="{label}"]'
 
     def get_cell_text(self, column_title: str):
         self.logger.debug(f"get cell text of column: {column_title}")

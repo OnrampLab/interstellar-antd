@@ -1,5 +1,3 @@
-from urllib.parse import urlparse
-
 from selenium.webdriver.common.keys import Keys
 from transstellar.framework import Element
 

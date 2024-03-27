@@ -1,13 +1,8 @@
-from urllib.parse import urlparse
-
 from transstellar.framework import Element
 
 
 class Switch(Element):
     XPATH_CURRENT = '//button[contains(@class, "ant-switch")]'
-
-    def get_switch_xpath(self):
-        return self.XPATH_CURRENT
 
     def switch(self, on: bool):
         self.logger.info(f"switch on: {on}")

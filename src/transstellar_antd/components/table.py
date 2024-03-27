@@ -1,5 +1,4 @@
 from typing import List, Union
-from urllib.parse import urlparse
 
 from selenium.webdriver.common.by import By
 from transstellar.framework import Element
@@ -29,9 +28,6 @@ class Table(Element):
 
         for row in self.rows:
             row.set_column_titles(self.column_titles)
-
-    def get_button_xpath(self, label):
-        return f'//button[contains(@class, "ant-btn") and span/text()="{label}"]'
 
     def find_row(self, column_title: str, column_text) -> Union[None, Row]:
         self.logger.info(f"finding row with column {column_title}: {column_text}")

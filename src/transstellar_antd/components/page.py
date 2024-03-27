@@ -1,5 +1,4 @@
 import time
-from urllib.parse import urlparse
 
 from transstellar.framework import BasePage
 
