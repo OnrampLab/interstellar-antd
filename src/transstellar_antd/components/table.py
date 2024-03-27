@@ -16,8 +16,7 @@ class Table(Element):
     column_titles = {}
 
     def init_after_dom_element_is_set(self):
-
-        header_columns = self.driver.find_elements(
+        header_columns = self.dom_element.find_elements(
             By.CSS_SELECTOR, self.SELECTOR_TABLE_HEADER
         )
 
@@ -29,14 +28,14 @@ class Table(Element):
         for row in self.rows:
             row.set_column_titles(self.column_titles)
 
-    def find_row(self, column_title: str, column_text) -> Union[None, Row]:
+    def find_row(self, column_title: str, column_text: str) -> Union[None, Row]:
         self.logger.info(f"finding row with column {column_title}: {column_text}")
 
         column_index = self.column_titles[column_title]
 
         if column_index is not None:
             for row in self.rows:
-                if row.get_cell_text(column_title) == column_text:
+                if row.get_cell_text(column_title) == str(column_text):
                     self.logger.debug(
                         f"found row with column {column_title} as {column_text}"
                     )
