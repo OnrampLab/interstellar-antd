@@ -1,4 +1,5 @@
 __all__ = [
+    "Anchor",
     "Button",
     "Checkbox",
     "Form",
@@ -16,6 +17,7 @@ __all__ = [
     "TextArea",
 ]
 
+from .components.anchor import Anchor
 from .components.button import Button
 from .components.checkbox import Checkbox
 from .components.form import Form
