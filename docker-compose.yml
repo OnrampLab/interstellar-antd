@@ -6,6 +6,16 @@ services:
       - selenium
     volumes:
       - .:/project
+    environment:
+      - POETRY_PYPI_TOKEN_PYPI=${POETRY_PYPI_TOKEN_PYPI}
+      - PYTHONPATH=./src
+    command:
+      >
+        bash -i -c -e
+        "
+        poetry install --no-root;
+        tail -f /dev/null;
+        "
 
   selenium:
     image: selenium/standalone-chrome
