@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "transstellar-antd"
-version = "0.3.0"
+version = "0.4.0"
 description = "A ant design component for pytest based on transstellar framework."
 authors = ["Onramplab Dev <dev@onramplab.com>"]
 
