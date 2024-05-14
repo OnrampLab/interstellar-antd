@@ -46,11 +46,15 @@ class TestModal(BaseUITest):
         self.app.driver.set_window_size(1024, 768)
 
         self.page = page_class(self.app)
-        self.page.sleep(5)
+
+        # V5 page will jump to #footerRenderParams after a while.
+        # So we need to wait for it to avoid inconsistency.
+        self.page.sleep(15)
 
         button = self.page.find_element_by_label(button_class, "Open Modal")
         button.scroll_to_view()
         button.click()
+        self.page.sleep(3)
 
         self.modal = self.page.find_element_by_label(modal_class, "Basic Modal")
 
