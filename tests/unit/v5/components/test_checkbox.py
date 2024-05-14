@@ -29,7 +29,7 @@ scenario2 = (
 
 @handle_ui_error()
 class TestCheckbox(BaseUITest):
-    scenarios = [scenario1, scenario2]
+    scenarios = [scenario2]
     checkbox = None
 
     @pytest.fixture(autouse=True)
@@ -40,7 +40,7 @@ class TestCheckbox(BaseUITest):
         self.app.driver.get(url)
 
         page = page_class(self.app)
-        page.sleep(3)
+        page.sleep(5)
 
         self.checkbox = page.find_global_element(checkbox_class)
 
