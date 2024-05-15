@@ -6,7 +6,7 @@ authors = ["Onramplab Dev <dev@onramplab.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-transstellar = "^2.0.1"
+transstellar = "^2.1.0"
 selenium = "^4.18.1"
 
 [tool.poetry.group.dev.dependencies]
