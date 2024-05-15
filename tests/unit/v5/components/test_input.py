@@ -47,3 +47,4 @@ class TestInput(BaseUITest):
 
     def test_input(self):
         self.input.input("ABC")
+        self.input.input("DEF")
