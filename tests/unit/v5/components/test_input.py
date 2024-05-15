@@ -48,3 +48,11 @@ class TestInput(BaseUITest):
     def test_input(self):
         self.input.input("ABC")
         self.input.input("DEF")
+
+    def test_append(self):
+        self.input.append("ABC")
+        self.input.append("DEF")
+
+        new_text = self.input.get_value()
+
+        assert new_text == "ABCDEF"

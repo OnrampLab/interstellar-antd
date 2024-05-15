@@ -17,5 +17,10 @@ class Input(Element):
 
         assert new_value == value
 
+    def append(self, value: str):
+        self.logger.info(f"input to value: {value}")
+
+        self.get_current_dom_element().send_keys(value)
+
     def get_value(self):
         return self.dom_element.get_attribute("value")
