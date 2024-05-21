@@ -13,6 +13,7 @@ __all__ = [
     "Select",
     "Spin",
     "Switch",
+    "Tab",
     "Table",
     "TextArea",
 ]
@@ -31,5 +32,6 @@ from .row import Row
 from .select import Select
 from .spin import Spin
 from .switch import Switch
+from .tab import Tab
 from .table import Table
 from .text_area import TextArea

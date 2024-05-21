@@ -14,6 +14,7 @@ __all__ = [
     "Select",
     "Spin",
     "Switch",
+    "Tab",
     "Table",
     "TextArea",
 ]
@@ -33,5 +34,6 @@ from .components.row import Row
 from .components.select import Select
 from .components.spin import Spin
 from .components.switch import Switch
+from .components.tab import Tab
 from .components.table import Table
 from .components.text_area import TextArea
