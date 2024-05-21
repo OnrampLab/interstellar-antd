@@ -29,6 +29,14 @@ class Row(Element):
 
         return dom_element
 
+    def get_cells(self):
+        cells = {}
+
+        for column_title in self.column_titles:
+            cells[column_title] = self.get_cell_text(column_title)
+
+        return cells
+
     def __get_cell_dom_element(self, column_name: str):
         self.logger.debug(f"get cell of column {column_name}")
 
