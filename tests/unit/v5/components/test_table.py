@@ -31,6 +31,7 @@ scenario2 = (
 class TestTable(BaseUITest):
     scenarios = [scenario1, scenario2]
     page = None
+    table = None
     table_class = None
 
     @pytest.fixture(autouse=True)
@@ -44,10 +45,15 @@ class TestTable(BaseUITest):
         self.page = page_class(self.app)
         self.page.sleep(3)
 
-    def test_table(self):
-        table = self.page.find_element(self.table_class)
-        table.scroll_to_view()
+        self.table = self.page.find_element(self.table_class)
+        self.table.scroll_to_view()
 
-        row = table.find_row("Age", 42)
+    def test_find_row(self):
+        row = self.table.find_row("Age", 42)
+
+        assert row is not None
+
+    def test_get_row(self):
+        row = self.table.get_row(0)
 
         assert row is not None

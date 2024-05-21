@@ -45,3 +45,8 @@ class Table(Element):
         raise Exception(
             f"could not find row with column {column_title} as {column_text}"
         )
+
+    def get_row(self, index: int):
+        self.logger.info(f"finding row by index: {index}")
+
+        return self.rows[index]
