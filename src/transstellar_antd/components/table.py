@@ -21,7 +21,13 @@ class Table(Element):
         )
 
         for index, column in enumerate(header_columns):
-            self.column_titles[column.text.strip()] = index
+            column_name = column.get_attribute("innerHTML").strip()
+
+            # Sometimes there is a column used as scrollbar
+            if column_name == "":
+                continue
+
+            self.column_titles[column_name] = index
 
         self.rows = self.find_elements(self.ROW_CLASS)
 
