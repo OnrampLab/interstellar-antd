@@ -1,5 +1,6 @@
 __all__ = [
     "Button",
+    "Breadcrumb",
     "Checkbox",
     "Form",
     "FormItem",
@@ -16,6 +17,7 @@ __all__ = [
     "TextArea",
 ]
 
+from .breadcrumb import Breadcrumb
 from .button import Button
 from .checkbox import Checkbox
 from .form import Form

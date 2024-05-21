@@ -1,5 +1,6 @@
 __all__ = [
     "Anchor",
+    "Breadcrumb",
     "Button",
     "Checkbox",
     "Form",
@@ -18,6 +19,7 @@ __all__ = [
 ]
 
 from .components.anchor import Anchor
+from .components.breadcrumb import Breadcrumb
 from .components.button import Button
 from .components.checkbox import Checkbox
 from .components.form import Form
