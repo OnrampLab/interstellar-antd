@@ -1,4 +1,5 @@
 __all__ = [
+    "Badge",
     "Button",
     "Breadcrumb",
     "Checkbox",
@@ -18,6 +19,7 @@ __all__ = [
     "TextArea",
 ]
 
+from .badge import Badge
 from .breadcrumb import Breadcrumb
 from .button import Button
 from .checkbox import Checkbox
