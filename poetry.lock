@@ -1190,13 +1190,13 @@ files = [
 
 [[package]]
 name = "transstellar"
-version = "2.1.0"
+version = "2.4.1"
 description = "A pytest framework"
 optional = false
 python-versions = "<4.0,>=3.12"
 files = [
-    {file = "transstellar-2.1.0-py3-none-any.whl", hash = "sha256:83cf91f5098f9ef81ba1012dab017a34d29736730eca8d004cc750514360c7cc"},
-    {file = "transstellar-2.1.0.tar.gz", hash = "sha256:9cdd71d211d42701627bb857c80e1dcb38444aff47266633184083bedc71d1c2"},
+    {file = "transstellar-2.4.1-py3-none-any.whl", hash = "sha256:5e5a5f54a364599fb586bccc94cedc764081ea0ca722bbca7535eeaf50d261a6"},
+    {file = "transstellar-2.4.1.tar.gz", hash = "sha256:5155531647885f9f7a0182f4c1947ddbb879221f4b2286a0bf3c43cc6d590484"},
 ]
 
 [package.dependencies]
@@ -1393,4 +1393,4 @@ test = ["pytest"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "ca119634f4da8e19c6d6db2401eff4479ab82b38486990dc9268cd524065ef5d"
+content-hash = "457f4d32fd810771024a28f71b4b9f212ab11db6e85e79b813499e8a5b6e8c24"
