@@ -7,7 +7,7 @@ from .row import Row
 
 
 class Table(Element):
-    XPATH_CURRENT = '//div[contains(@class, "ant-table")]'
+    XPATH_CURRENT = '//div[contains(@class, "ant-table ")]'
     SELECTOR_TABLE_HEADER = "thead.ant-table-thead th.ant-table-cell"
     SELECTOR_ROW = "tbody.ant-table-tbody tr.ant-table-row"
     ROW_CLASS = Row
@@ -29,10 +29,16 @@ class Table(Element):
 
             self.column_titles[column_name] = index
 
-        self.rows = self.find_elements(self.ROW_CLASS)
+        if not self.is_empty():
+            self.rows = self.find_elements(self.ROW_CLASS)
 
-        for row in self.rows:
-            row.set_column_titles(self.column_titles)
+            for row in self.rows:
+                row.set_column_titles(self.column_titles)
+
+    def is_empty(self):
+        classes = self.get_current_dom_element().get_attribute("class")
+
+        return "ant-table-empty" in classes
 
     def find_row(self, column_title: str, column_text: str) -> Union[None, Row]:
         self.logger.info(f"finding row with column {column_title}: {column_text}")
