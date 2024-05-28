@@ -1,5 +1,5 @@
 import pytest
-from transstellar.framework import BaseUITest, handle_ui_error
+from transstellar.framework import BaseUITest, Element, handle_ui_error
 
 from tests.pytest_generate_tests_helper import pytest_generate_tests_helper
 from transstellar_antd.v4 import Page as V4Page
@@ -27,6 +27,10 @@ scenario2 = (
 )
 
 
+class BasicTableCodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "components-table-demo-basic")]'
+
+
 @handle_ui_error()
 class TestTable(BaseUITest):
     scenarios = [scenario1, scenario2]
@@ -45,8 +49,10 @@ class TestTable(BaseUITest):
         self.page = page_class(self.app)
         self.page.sleep(3)
 
-        self.table = self.page.find_element(self.table_class)
+        code_block = self.page.find_element(BasicTableCodeBlock)
+        self.table = code_block.find_element(self.table_class)
         self.table.scroll_to_view()
+        self.page.sleep(3)
 
     def test_find_row(self):
         row = self.table.find_row("Age", 42)

@@ -1,5 +1,5 @@
 import pytest
-from transstellar.framework import BaseUITest, handle_ui_error
+from transstellar.framework import BaseUITest, Element, handle_ui_error
 
 from tests.pytest_generate_tests_helper import pytest_generate_tests_helper
 from transstellar_antd.v4 import Page as V4Page
@@ -27,10 +27,15 @@ scenario2 = (
 )
 
 
+class BasicTableCodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "components-table-demo-basic")]'
+
+
 @handle_ui_error()
 class TestRow(BaseUITest):
     scenarios = [scenario1, scenario2]
     page = None
+    table = None
     row = None
     table_class = None
 
@@ -45,10 +50,13 @@ class TestRow(BaseUITest):
         self.page = page_class(self.app)
         self.page.sleep(3)
 
-        table = self.page.find_element(self.table_class)
-        table.scroll_to_view()
+        code_block = self.page.find_element(BasicTableCodeBlock)
+        code_block.scroll_to_view()
+        self.page.sleep(3)
 
-        self.row = table.get_row(0)
+        self.table = code_block.find_element(self.table_class)
+
+        self.row = self.table.get_row(0)
 
     def test_column_titles(self):
         assert self.row.column_titles is not None
