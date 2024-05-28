@@ -8,6 +8,9 @@ class Select(Element):
         '//input[contains(@class, "ant-select-selection-search-input")]'
     )
     XPATH_CURRENT_ITEM_TITLE = '//span[contains(@class, "ant-select-selection-item")]'
+    XPATH_TARGET_ITEM_TEMPLATE = (
+        '//div[contains(@class, "ant-select-item") and contains(@title, "{title}")]'
+    )
 
     def select(self, text):
         self.logger.info(f"selecting text: {text}")
