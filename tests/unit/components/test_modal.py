@@ -60,3 +60,6 @@ class TestModal(BaseUITest):
 
     def test_close(self):
         self.modal.close()
+
+    def test_get_title(self):
+        assert self.modal.get_title() == "Basic Modal"
