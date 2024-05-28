@@ -1,5 +1,5 @@
 import pytest
-from transstellar.framework import BaseUITest, handle_ui_error
+from transstellar.framework import BaseUITest, Element, handle_ui_error
 
 from tests.pytest_generate_tests_helper import pytest_generate_tests_helper
 from transstellar_antd.v4 import Page as V4Page
@@ -27,6 +27,10 @@ scenario2 = (
 )
 
 
+class CodeSearchBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "select-demo-search")]'
+
+
 @handle_ui_error()
 class TestSelect(BaseUITest):
     scenarios = [scenario1, scenario2]
@@ -45,6 +49,21 @@ class TestSelect(BaseUITest):
         self.page.sleep(3)
 
     def test_select(self):
-        select = self.page.find_element(self.select_class)
+        code_block = self.page.find_element(CodeSearchBlock)
+        select = code_block.find_element(self.select_class)
+        select.scroll_to_view()
+        self.page.sleep(3)
 
         select.select("Jack")
+
+        assert select.get_current_item_title() == "Jack"
+
+    def test_select_by_search(self):
+        code_block = self.page.find_element(CodeSearchBlock)
+        select = code_block.find_element(self.select_class)
+        select.scroll_to_view()
+        self.page.sleep(3)
+
+        select.select_by_search("Jack")
+
+        assert select.get_current_item_title() == "Jack"

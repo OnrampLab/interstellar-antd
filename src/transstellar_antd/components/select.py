@@ -7,8 +7,22 @@ class Select(Element):
     XPATH_SELECT_SEARCH = (
         '//input[contains(@class, "ant-select-selection-search-input")]'
     )
+    XPATH_CURRENT_ITEM_TITLE = '//span[contains(@class, "ant-select-selection-item")]'
 
     def select(self, text):
+        self.logger.info(f"selecting text: {text}")
+
+        self.get_current_dom_element().click()
+
+        select_item = self.find_global_dom_element_by_xpath(
+            self.XPATH_TARGET_ITEM_TEMPLATE.format(title=text)
+        )
+        select_item.click()
+
+        # NOTE: need to find a better way to assert account has been totally changed
+        self.sleep(0.5)
+
+    def select_by_search(self, text):
         self.logger.info(f"selecting text: {text}")
 
         self.get_current_dom_element().click()
@@ -19,3 +33,8 @@ class Select(Element):
 
         # NOTE: need to find a better way to assert account has been totally changed
         self.sleep(0.5)
+
+    def get_current_item_title(self):
+        dom_element = self.find_dom_element_by_xpath(self.XPATH_CURRENT_ITEM_TITLE)
+
+        return dom_element.get_attribute("title")
