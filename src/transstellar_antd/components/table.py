@@ -7,7 +7,7 @@ from .row import Row
 
 
 class Table(Element):
-    XPATH_CURRENT = '//div[contains(@class, "ant-table-wrapper")]'
+    XPATH_CURRENT = '//div[contains(@class, "ant-table-wrapper")]//div[contains(@class, "ant-table")]'
     SELECTOR_TABLE_HEADER = "thead.ant-table-thead th.ant-table-cell"
     SELECTOR_ROW = "tbody.ant-table-tbody tr.ant-table-row"
     ROW_CLASS = Row
@@ -54,7 +54,7 @@ class Table(Element):
 
                     return row
 
-        raise Exception(
+        raise LookupError(
             f"could not find row with column {column_title} as {column_text}"
         )
 
