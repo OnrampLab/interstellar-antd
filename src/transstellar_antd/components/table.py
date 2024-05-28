@@ -7,7 +7,7 @@ from .row import Row
 
 
 class Table(Element):
-    XPATH_CURRENT = '//div[contains(@class, "ant-table ")]'
+    XPATH_CURRENT = '//div[contains(@class, "ant-table-wrapper")]'
     SELECTOR_TABLE_HEADER = "thead.ant-table-thead th.ant-table-cell"
     SELECTOR_ROW = "tbody.ant-table-tbody tr.ant-table-row"
     ROW_CLASS = Row
