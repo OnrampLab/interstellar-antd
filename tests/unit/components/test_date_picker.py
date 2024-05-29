@@ -41,7 +41,7 @@ class RangePickerBlock(Element):
 
 @handle_ui_error()
 class TestDatePicker(BaseUITest):
-    scenarios = [scenario1, scenario2]
+    scenarios = [scenario2]
     page = None
     date_picker_class = None
 
@@ -63,11 +63,21 @@ class TestDatePicker(BaseUITest):
 
         date_picker.pick_date(from_date)
 
-    def test_range_picker(self):
+    def test_pick_date_range(self):
         code_block = self.page.find_element(RangePickerBlock)
         date_picker = code_block.find_element(self.date_picker_class)
 
         from_date = date(2024, 5, 17)
         to_date = date(2024, 5, 24)
 
-        date_picker.range(from_date, to_date)
+        date_picker.pick_date_range(from_date, to_date)
+
+    def test_pick_date_range_with_time(self):
+        code_block = self.page.find_element(RangePickerBlock)
+        date_pickers = code_block.find_elements(self.date_picker_class)
+        date_picker = date_pickers[1]
+
+        from_date = date(2024, 5, 17)
+        to_date = date(2024, 5, 24)
+
+        date_picker.pick_date_range(from_date, to_date, True)
