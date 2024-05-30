@@ -41,7 +41,7 @@ class RangePickerBlock(Element):
 
 @handle_ui_error()
 class TestDatePicker(BaseUITest):
-    scenarios = [scenario2]
+    scenarios = [scenario1, scenario2]
     page = None
     date_picker_class = None
 
@@ -55,7 +55,7 @@ class TestDatePicker(BaseUITest):
         self.date_picker_class = date_picker_class
         self.page = page_class(self.app)
 
-    def test_pick_date(self):
+    def test_pick_single_date(self):
         code_block = self.page.find_element(BasicPickerBlock)
 
         date_picker = code_block.find_element(self.date_picker_class)
@@ -63,7 +63,9 @@ class TestDatePicker(BaseUITest):
 
         date_picker.pick_date(from_date)
 
-    def test_pick_date_range(self):
+        assert date_picker.get_basic_date_value() == "2024-05-17"
+
+    def test_pick_date_range_for_date_only(self):
         code_block = self.page.find_element(RangePickerBlock)
         date_picker = code_block.find_element(self.date_picker_class)
 
@@ -71,6 +73,8 @@ class TestDatePicker(BaseUITest):
         to_date = date(2024, 5, 24)
 
         date_picker.pick_date_range(from_date, to_date)
+
+        assert date_picker.get_date_range_values() == ["2024-05-17", "2024-05-24"]
 
     def test_pick_date_range_with_time(self):
         code_block = self.page.find_element(RangePickerBlock)
@@ -81,3 +85,8 @@ class TestDatePicker(BaseUITest):
         to_date = date(2024, 5, 24)
 
         date_picker.pick_date_range(from_date, to_date, True)
+
+        assert date_picker.get_date_range_values() == [
+            "2024-05-17 00:00:00",
+            "2024-05-24 00:00:00",
+        ]

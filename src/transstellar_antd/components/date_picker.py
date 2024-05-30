@@ -1,9 +1,11 @@
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from transstellar.framework import Element
 
 
 class DatePicker(Element):
-    XPATH_CURRENT = '//div[contains(@class, "ant-picker ")]'
+    XPATH_CURRENT = '//div[contains(@class, "ant-picker-input")]/ancestor::div[contains(@class, "ant-picker")]'
+
     XPATH_INPUT = '//div[contains(@class, "ant-picker-input")]/input'
 
     def pick_date(self, target_date, is_datetime=False):
@@ -22,12 +24,6 @@ class DatePicker(Element):
 
         self.__update_date(from_date_input, from_date, is_datetime)
         self.__update_date(to_date_input, to_date, is_datetime)
-
-        new_value = from_date_input.get_attribute("value")
-        self.logger.info(f"new_value: {new_value}")
-
-        # Close calendar
-        self.get_current_dom_element().click()
 
     def get_basic_date_value(self):
         dom_element = self.find_dom_element_by_xpath(self.XPATH_INPUT)
@@ -48,16 +44,20 @@ class DatePicker(Element):
         formatted_date = date.strftime(date_format)
 
         input_element.click()
-        input_element.send_keys(Keys.ENTER)
-        # Wait for calendar shows
+
+        # Wait for calendar to show
         self.sleep(3)
 
         input_element.send_keys(Keys.CONTROL + "a")
         input_element.send_keys(Keys.DELETE)
         input_element.send_keys(formatted_date)
-
         input_element.send_keys(Keys.ENTER)
+
+        # Wait for calendar to hide
+        self.sleep(3)
 
         new_value = input_element.get_attribute("value")
 
         assert new_value == formatted_date
+
+        return new_value
