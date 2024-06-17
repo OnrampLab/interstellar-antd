@@ -7,6 +7,7 @@ __all__ = [
     "Form",
     "FormItem",
     "Input",
+    "Menu",
     "Message",
     "Modal",
     "Page",
@@ -28,6 +29,7 @@ from .date_picker import DatePicker
 from .form import Form
 from .form_item import FormItem
 from .input import Input
+from .menu import Menu
 from .message import Message
 from .modal import Modal
 from .page import Page

@@ -8,6 +8,7 @@ __all__ = [
     "Form",
     "FormItem",
     "Input",
+    "Menu",
     "Message",
     "Modal",
     "Page",
@@ -30,6 +31,7 @@ from .components.date_picker import DatePicker
 from .components.form import Form
 from .components.form_item import FormItem
 from .components.input import Input
+from .components.menu import Menu
 from .components.message import Message
 from .components.modal import Modal
 from .components.page import Page
