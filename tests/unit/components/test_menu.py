@@ -27,7 +27,7 @@ scenario2 = (
 )
 
 
-class CodeSearchBlock(Element):
+class CodeBlock(Element):
     XPATH_CURRENT = (
         '//section[@id="menu-demo-inline" or @id="components-menu-demo-inline"]'
     )
@@ -35,7 +35,7 @@ class CodeSearchBlock(Element):
 
 @handle_ui_error()
 class TestMenu(BaseUITest):
-    scenarios = [scenario1]
+    scenarios = [scenario1, scenario2]
     page = None
     menu_class = None
 
@@ -51,7 +51,7 @@ class TestMenu(BaseUITest):
         self.page.sleep(3)
 
     def test_menu(self):
-        code_block = self.page.find_element(CodeSearchBlock)
+        code_block = self.page.find_element(CodeBlock)
         menu = code_block.find_element(self.menu_class)
         menu.scroll_to_view()
         self.page.sleep(3)
