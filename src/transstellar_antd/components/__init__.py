@@ -3,6 +3,7 @@ __all__ = [
     "Button",
     "Breadcrumb",
     "Checkbox",
+    "Collapse",
     "DatePicker",
     "Form",
     "FormItem",
@@ -25,6 +26,7 @@ from .badge import Badge
 from .breadcrumb import Breadcrumb
 from .button import Button
 from .checkbox import Checkbox
+from .collapse import Collapse
 from .date_picker import DatePicker
 from .form import Form
 from .form_item import FormItem
