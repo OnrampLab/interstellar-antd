@@ -13,6 +13,7 @@ __all__ = [
     "Message",
     "Modal",
     "Page",
+    "Popover",
     "PopoverConfirm",
     "Row",
     "Select",
@@ -37,6 +38,7 @@ from .components.menu import Menu
 from .components.message import Message
 from .components.modal import Modal
 from .components.page import Page
+from .components.popover import Popover
 from .components.popover_confirm import PopoverConfirm
 from .components.row import Row
 from .components.select import Select

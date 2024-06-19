@@ -12,6 +12,7 @@ __all__ = [
     "Message",
     "Modal",
     "Page",
+    "Popover",
     "PopoverConfirm",
     "Row",
     "Select",
@@ -35,6 +36,7 @@ from .menu import Menu
 from .message import Message
 from .modal import Modal
 from .page import Page
+from .popover import Popover
 from .popover_confirm import PopoverConfirm
 from .row import Row
 from .select import Select
