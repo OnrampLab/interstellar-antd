@@ -5,6 +5,7 @@ __all__ = [
     "Button",
     "Checkbox",
     "Collapse",
+    "ColorPicker",
     "DatePicker",
     "Form",
     "FormItem",
@@ -30,6 +31,7 @@ from .components.breadcrumb import Breadcrumb
 from .components.button import Button
 from .components.checkbox import Checkbox
 from .components.collapse import Collapse
+from .components.color_picker import ColorPicker
 from .components.date_picker import DatePicker
 from .components.form import Form
 from .components.form_item import FormItem
