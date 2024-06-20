@@ -27,6 +27,10 @@ scenario2 = (
 )
 
 
+class BasicUsageCodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "select-demo-basic")]'
+
+
 class CodeSearchBlock(Element):
     XPATH_CURRENT = '//section[contains(@id, "select-demo-search")]'
 
@@ -67,3 +71,12 @@ class TestSelect(BaseUITest):
         select.select_by_search("Jack")
 
         assert select.get_current_item_title() == "Jack"
+
+    def test_enabled(self):
+        code_block = self.page.find_element(BasicUsageCodeBlock)
+        selects = code_block.find_elements(self.select_class)
+        select = selects[1]
+        select.scroll_to_view()
+        self.page.sleep(3)
+
+        assert not select.is_enabled()

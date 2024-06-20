@@ -1,5 +1,5 @@
 import pytest
-from transstellar.framework import BaseUITest, handle_ui_error
+from transstellar.framework import BaseUITest, Element, handle_ui_error
 
 from tests.pytest_generate_tests_helper import pytest_generate_tests_helper
 from transstellar_antd.v4 import Button as V4Button
@@ -27,6 +27,10 @@ scenario2 = (
 )
 
 
+class CodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "components-button-demo-disabled")]'
+
+
 @handle_ui_error()
 class TestButton(BaseUITest):
     scenarios = [scenario1, scenario2]
@@ -50,3 +54,11 @@ class TestButton(BaseUITest):
 
     def test_click(self):
         self.button.click()
+
+    def test_enabled(self):
+        code_block = self.page.find_element(CodeBlock)
+        self.button = code_block.find_element_by_label(self.button_class, "disabled")
+        self.button.scroll_to_view()
+        self.button.sleep(3)
+
+        assert not self.button.is_enabled()

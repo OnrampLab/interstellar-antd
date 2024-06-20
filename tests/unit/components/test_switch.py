@@ -1,5 +1,5 @@
 import pytest
-from transstellar.framework import BaseUITest, handle_ui_error
+from transstellar.framework import BaseUITest, Element, handle_ui_error
 
 from tests.pytest_generate_tests_helper import pytest_generate_tests_helper
 from transstellar_antd.v4 import Page as V4Page
@@ -27,6 +27,10 @@ scenario2 = (
 )
 
 
+class CodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "switch-demo-disabled")]'
+
+
 @handle_ui_error()
 class TestSwitch(BaseUITest):
     scenarios = [scenario1, scenario2]
@@ -48,3 +52,11 @@ class TestSwitch(BaseUITest):
         switch = self.page.find_element(self.switch_class)
 
         switch.switch(False)
+
+    def test_enabled(self):
+        code_block = self.page.find_element(CodeBlock)
+        self.switch = code_block.find_element(self.switch_class)
+        self.switch.scroll_to_view()
+        self.switch.sleep(3)
+
+        assert not self.switch.is_enabled()

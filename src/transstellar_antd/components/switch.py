@@ -4,6 +4,9 @@ from transstellar.framework import Element
 class Switch(Element):
     XPATH_CURRENT = '//button[contains(@class, "ant-switch")]'
 
+    def is_enabled(self):
+        return "ant-switch-disabled" not in self.get_classes()
+
     def switch(self, on: bool):
         self.logger.info(f"switch on: {on}")
 
@@ -16,6 +19,7 @@ class Switch(Element):
 
         if should_click:
             ant_switch.click()
+            self.sleep(0.5)
 
         updated_ant_switch = self.refresh()
         current_checked = updated_ant_switch.get_attribute("aria-checked")

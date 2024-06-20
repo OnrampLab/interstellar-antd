@@ -4,6 +4,9 @@ from transstellar.framework import Element
 class Checkbox(Element):
     XPATH_CURRENT = '//span[contains(@class, "ant-checkbox")]'
 
+    def is_enabled(self):
+        return "ant-checkbox-disabled" not in self.get_classes()
+
     def get_checkbox_xpath(self, label):
         if label:
             return f'//div[label/text()="{label}"]/following-sibling::div{self.XPATH_CURRENT}'

@@ -12,6 +12,9 @@ class Select(Element):
         '//div[contains(@class, "ant-select-item") and contains(@title, "{title}")]'
     )
 
+    def is_enabled(self):
+        return "ant-select-disabled" not in self.get_classes()
+
     def select(self, text):
         self.logger.info(f"selecting text: {text}")
 

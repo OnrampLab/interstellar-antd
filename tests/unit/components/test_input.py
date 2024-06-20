@@ -1,5 +1,5 @@
 import pytest
-from transstellar.framework import BaseUITest, handle_ui_error
+from transstellar.framework import BaseUITest, Element, handle_ui_error
 
 from tests.pytest_generate_tests_helper import pytest_generate_tests_helper
 from transstellar_antd.v4 import Input as V4Input
@@ -27,9 +27,14 @@ scenario2 = (
 )
 
 
+class PrefixAndSuffixCodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "components-input-demo-presuffix")]'
+
+
 @handle_ui_error()
 class TestInput(BaseUITest):
     scenarios = [scenario1, scenario2]
+    input_class = None
     input = None
 
     @pytest.fixture(autouse=True)
@@ -39,8 +44,9 @@ class TestInput(BaseUITest):
     def prepare(self, page_class, input_class, url):
         self.app.driver.get(url)
 
-        page = page_class(self.app)
-        self.input = page.find_global_element(input_class)
+        self.page = page_class(self.app)
+        self.input_class = input_class
+        self.input = self.page.find_global_element(input_class)
 
     def test_constructor(self):
         assert self.input is not None
@@ -56,3 +62,12 @@ class TestInput(BaseUITest):
         new_text = self.input.get_value()
 
         assert new_text == "ABCDEF"
+
+    def test_enabled(self):
+        code_block = self.page.find_element(PrefixAndSuffixCodeBlock)
+        inputs = code_block.find_elements(self.input_class)
+        self.input = inputs[2]
+        self.input.scroll_to_view()
+        self.input.sleep(3)
+
+        assert not self.input.is_enabled()

@@ -1,5 +1,5 @@
 import pytest
-from transstellar.framework import BaseUITest, handle_ui_error
+from transstellar.framework import BaseUITest, Element, handle_ui_error
 
 from tests.pytest_generate_tests_helper import pytest_generate_tests_helper
 from transstellar_antd.v4 import Checkbox as V4Checkbox
@@ -27,10 +27,15 @@ scenario2 = (
 )
 
 
+class CodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "components-checkbox-demo-disabled")]'
+
+
 @handle_ui_error()
 class TestCheckbox(BaseUITest):
-    scenarios = [scenario2]
+    scenarios = [scenario1, scenario2]
     checkbox = None
+    checkbox_class = None
 
     @pytest.fixture(autouse=True)
     def setup_method_test(self, page_class, checkbox_class, url):
@@ -39,13 +44,22 @@ class TestCheckbox(BaseUITest):
     def prepare(self, page_class, checkbox_class, url):
         self.app.driver.get(url)
 
-        page = page_class(self.app)
-        page.sleep(5)
+        self.page = page_class(self.app)
+        self.page.sleep(5)
 
-        self.checkbox = page.find_global_element(checkbox_class)
+        self.checkbox_class = checkbox_class
+        self.checkbox = self.page.find_global_element(checkbox_class)
 
     def test_constructor(self):
         assert self.checkbox is not None
 
     def test_check(self):
         self.checkbox.check(True)
+
+    def test_enabled(self):
+        code_block = self.page.find_element(CodeBlock)
+        self.checkbox = code_block.find_element(self.checkbox_class)
+        self.checkbox.scroll_to_view()
+        self.checkbox.sleep(3)
+
+        assert not self.checkbox.is_enabled()

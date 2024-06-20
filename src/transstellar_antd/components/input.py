@@ -5,6 +5,9 @@ from transstellar.framework import Element
 class Input(Element):
     XPATH_CURRENT = '//input[contains(@class, "ant-input")]'
 
+    def is_enabled(self):
+        return "ant-input-disabled" not in self.get_classes()
+
     def input(self, value: str):
         self.logger.info(f"input to value: {value}")
 
