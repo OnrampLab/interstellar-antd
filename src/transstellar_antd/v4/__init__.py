@@ -22,6 +22,7 @@ __all__ = [
     "Tab",
     "Table",
     "TextArea",
+    "Upload",
 ]
 
 from ..components.anchor import Anchor
@@ -47,3 +48,4 @@ from .components.switch import Switch
 from .components.tab import Tab
 from .components.table import Table
 from .components.text_area import TextArea
+from .components.upload import Upload

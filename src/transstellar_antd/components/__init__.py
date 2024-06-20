@@ -22,6 +22,7 @@ __all__ = [
     "Tab",
     "Table",
     "TextArea",
+    "Upload",
 ]
 
 from .badge import Badge
@@ -47,3 +48,4 @@ from .switch import Switch
 from .tab import Tab
 from .table import Table
 from .text_area import TextArea
+from .upload import Upload
