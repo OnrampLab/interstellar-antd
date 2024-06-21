@@ -41,7 +41,7 @@ class Form(Element):
         checkbox_element.check(value)
 
     def find_element_by_label(self, label: str, element_class):
-        form_item: FormItem = self.find_element_by_label(FormItem, label)
+        form_item: FormItem = super().find_element_by_label(FormItem, label)
         element: element_class = form_item.find_form_control(element_class)
 
         return element
