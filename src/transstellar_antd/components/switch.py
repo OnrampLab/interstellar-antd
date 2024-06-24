@@ -21,8 +21,7 @@ class Switch(Element):
             ant_switch.click()
             self.sleep(0.5)
 
-        updated_ant_switch = self.refresh()
-        current_checked = updated_ant_switch.get_attribute("aria-checked")
+        current_checked = ant_switch.get_attribute("aria-checked")
 
         if on:
             assert current_checked == "true"
