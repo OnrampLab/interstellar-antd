@@ -2,21 +2,23 @@ from transstellar.framework import Element
 
 
 class Checkbox(Element):
-    XPATH_CURRENT = '//span[contains(@class, "ant-checkbox")]'
+    XPATH_CURRENT = '//label[contains(@class, "ant-checkbox-wrapper")]'
+    XPATH_CHECKBOX = '//span[contains(@class, "ant-checkbox")]'
+
+    def get_checkbox_dom_element(self):
+        dom_element = self.find_dom_element_by_xpath(self.XPATH_CHECKBOX)
+
+        return dom_element
 
     def is_enabled(self):
-        return "ant-checkbox-disabled" not in self.get_classes()
+        dom_element = self.find_dom_element_by_xpath(self.XPATH_CHECKBOX)
 
-    def get_checkbox_xpath(self, label):
-        if label:
-            return f'//div[label/text()="{label}"]/following-sibling::div{self.XPATH_CURRENT}'
-        else:
-            return self.XPATH_CURRENT
+        return "ant-checkbox-disabled" not in dom_element.get_attribute("class")
 
     def check(self, on: bool):
         self.logger.info(f"check on: {on}")
 
-        ant_checkbox = self.get_current_dom_element()
+        ant_checkbox = self.get_checkbox_dom_element()
         class_names = ant_checkbox.get_attribute("class")
         current_checked = "ant-checkbox-checked" in class_names.split()
 
@@ -28,10 +30,9 @@ class Checkbox(Element):
         if should_click:
             ant_checkbox.click()
 
-        updated_ant_checkbox = self.refresh()
-        current_checked = updated_ant_checkbox.get_attribute("aria-checked")
+        current_checked = ant_checkbox.get_attribute("aria-checked")
 
-        updated_class_names = updated_ant_checkbox.get_attribute("class")
+        updated_class_names = ant_checkbox.get_attribute("class")
         current_checked = "ant-checkbox-checked" in updated_class_names.split()
 
         assert current_checked == on
