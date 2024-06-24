@@ -16,32 +16,48 @@ class Form(Element):
     SWITCH_CLASS = Switch
     CHECKBOX_CLASS = Checkbox
 
-    def input(self, label: str, value: str):
-        input_element: Input = self.find_element_by_label(label, self.INPUT_CLASS)
+    def input(self, form_item_label: str, value: str):
+        input_element: Input = self.find_element_by_form_item_label(
+            self.INPUT_CLASS, form_item_label
+        )
         input_element.input(value)
 
-    def text_area_input(self, label: str, value: str):
-        text_area_element: TextArea = self.find_element_by_label(
-            label, self.TEXT_AREA_CLASS
+    def text_area_input(self, form_item_label: str, value: str):
+        text_area_element: TextArea = self.find_element_by_form_item_label(
+            self.TEXT_AREA_CLASS,
+            form_item_label,
         )
         text_area_element.input(value)
 
-    def select(self, label: str, value: str):
-        select_element: Select = self.find_element_by_label(label, self.SELECT_CLASS)
+    def select(self, form_item_label: str, value: str):
+        select_element: Select = self.find_element_by_form_item_label(
+            self.SELECT_CLASS,
+            form_item_label,
+        )
         select_element.select(value)
 
-    def switch(self, label: str, value: str):
-        switch_element: Switch = self.find_element_by_label(label, self.SWITCH_CLASS)
-        switch_element.switch(value)
-
-    def check(self, label: str, value: str):
-        checkbox_element: Checkbox = self.find_element_by_label(
-            label, self.CHECKBOX_CLASS
+    def switch(self, form_item_label: str, on: bool):
+        switch_element: Switch = self.find_element_by_form_item_label(
+            self.SWITCH_CLASS,
+            form_item_label,
         )
-        checkbox_element.check(value)
+        switch_element.switch(on)
 
-    def find_element_by_label(self, label: str, element_class):
-        form_item: FormItem = super().find_element_by_label(FormItem, label)
+    def check(self, form_item_label: str, on: bool):
+        checkbox_element: Checkbox = self.find_element_by_form_item_label(
+            self.CHECKBOX_CLASS,
+            form_item_label,
+        )
+        checkbox_element.check(on)
+
+    def direct_check(self, label: str, on: bool):
+        checkbox_element: Checkbox = self.find_element_by_label(
+            self.CHECKBOX_CLASS, label
+        )
+        checkbox_element.check(on)
+
+    def find_element_by_form_item_label(self, element_class, form_item_label: str):
+        form_item: FormItem = self.find_element_by_label(FormItem, form_item_label)
         element: element_class = form_item.find_form_control(element_class)
 
         return element
