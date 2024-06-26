@@ -61,3 +61,11 @@ class Form(Element):
         element: element_class = form_item.find_form_control(element_class)
 
         return element
+
+    def is_form_item_present(self, form_item_label: str):
+        try:
+            self.find_element_by_label(FormItem, form_item_label)
+
+            return True
+        except Exception:
+            return False

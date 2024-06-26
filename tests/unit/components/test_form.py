@@ -115,3 +115,12 @@ class TestForm(BaseUITest):
         )
 
         assert checkbox is not None
+
+    def test_is_form_item_present(self):
+        code_block = self.page.find_element(DisabledBlock)
+        self.form = code_block.find_element(self.form_class)
+        self.form.scroll_to_view()
+        self.sleep(5)
+
+        assert self.form.is_form_item_present("TreeSelect")
+        assert not self.form.is_form_item_present("No Exist")
