@@ -1207,13 +1207,13 @@ files = [
 
 [[package]]
 name = "transstellar"
-version = "3.5.0"
+version = "3.7.0"
 description = "A pytest framework"
 optional = false
 python-versions = "<4.0,>=3.12"
 files = [
-    {file = "transstellar-3.5.0-py3-none-any.whl", hash = "sha256:03c134cf6118fa3e9175c628ef134badb83a836bfc6a14dce792f04c8e4a896c"},
-    {file = "transstellar-3.5.0.tar.gz", hash = "sha256:940d7acb4663991c546c73db52d0cc0e4ec503d656a0b284af4bcd4116f2e153"},
+    {file = "transstellar-3.7.0-py3-none-any.whl", hash = "sha256:7c1ddfbb84528838c7f8ea7db4b4b1bfbf40b5ca56163e15e92ece8e04c4c1dd"},
+    {file = "transstellar-3.7.0.tar.gz", hash = "sha256:d60782267129dcb6a244c298ad8df7149a064b75f435ffa6532e05164cb50e83"},
 ]
 
 [package.dependencies]
