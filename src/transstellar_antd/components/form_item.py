@@ -4,7 +4,7 @@ from transstellar.framework import Element
 
 
 class FormItem(Element):
-    XPATH_CURRENT = '//div[contains(@class, "ant-form-item")]'
+    XPATH_CURRENT = '//div[contains(@class, "ant-form-item ")]'
 
     def find_form_control(self, element_class):
         self.logger.info(

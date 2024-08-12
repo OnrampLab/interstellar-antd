@@ -15,6 +15,7 @@ class Form(Element):
     SELECT_CLASS = Select
     SWITCH_CLASS = Switch
     CHECKBOX_CLASS = Checkbox
+    FORM_ITEM_CLASS = FormItem
 
     def input(self, form_item_label: str, value: str):
         input_element: Input = self.find_element_by_form_item_label(
@@ -57,14 +58,16 @@ class Form(Element):
         checkbox_element.check(on)
 
     def find_element_by_form_item_label(self, element_class, form_item_label: str):
-        form_item: FormItem = self.find_element_by_label(FormItem, form_item_label)
+        form_item: FormItem = self.find_element_by_label(
+            self.FORM_ITEM_CLASS, form_item_label
+        )
         element: element_class = form_item.find_form_control(element_class)
 
         return element
 
     def is_form_item_present(self, form_item_label: str):
         try:
-            self.find_element_by_label(FormItem, form_item_label)
+            self.find_element_by_label(self.FORM_ITEM_CLASS, form_item_label)
 
             return True
         except Exception:

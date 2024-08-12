@@ -13,5 +13,4 @@ class Form(BaseForm):
     SELECT_CLASS = Select
     SWITCH_CLASS = Switch
     CHECKBOX_CLASS = Checkbox
-
-    pass
+    FORM_ITEM_CLASS = FormItem
