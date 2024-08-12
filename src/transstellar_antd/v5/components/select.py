@@ -2,4 +2,4 @@ from ...components import Select as BaseSelect
 
 
 class Select(BaseSelect):
-    pass
+    SHOULD_DOUBLE_CLICK = True

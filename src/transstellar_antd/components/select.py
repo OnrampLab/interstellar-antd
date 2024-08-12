@@ -9,8 +9,9 @@ class Select(Element):
     )
     XPATH_CURRENT_ITEM_TITLE = '//span[contains(@class, "ant-select-selection-item")]'
     XPATH_TARGET_ITEM_TEMPLATE = (
-        '//div[contains(@class, "ant-select-item") and contains(@title, "{title}")]'
+        '//div[contains(@class, "ant-select-item") and @title="{title}"]'
     )
+    SHOULD_DOUBLE_CLICK = False
 
     def is_enabled(self):
         return "ant-select-disabled" not in self.get_classes()
@@ -18,7 +19,11 @@ class Select(Element):
     def select(self, text):
         self.logger.info(f"selecting text: {text}")
 
-        self.get_current_dom_element().click()
+        self.click()
+
+        if self.SHOULD_DOUBLE_CLICK:
+            # NOTE: Only v5 has this issue
+            self.click()
 
         select_item = self.find_global_dom_element_by_xpath(
             self.XPATH_TARGET_ITEM_TEMPLATE.format(title=text)
