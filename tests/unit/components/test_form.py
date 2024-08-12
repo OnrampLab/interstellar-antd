@@ -31,24 +31,44 @@ scenario2 = (
 )
 
 
-class RegisterBlock(Element):
+class V4RegisterBlock(Element):
     XPATH_CURRENT = '//section[contains(@id, "components-form-demo-register")]'
 
 
-class DisabledBlock(Element):
+class V4DisabledBlock(Element):
     XPATH_CURRENT = '//section[@id="components-form-demo-disabled"]'
+
+
+class V5RegisterBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "form-demo-register")]'
+
+
+class V5DisabledBlock(Element):
+    XPATH_CURRENT = '//section[@id="form-demo-disabled"]'
 
 
 @handle_ui_error()
 class TestForm(BaseUITest):
-    scenarios = [scenario2]
+    scenarios = [scenario1, scenario2]
     page = None
     form_class = None
 
     @pytest.fixture(autouse=True)
-    def setup_method_test(self, page_class, form_class, checkbox_class, url):
+    def setup_method_test(self, request, page_class, form_class, checkbox_class, url):
         self.prepare(page_class, form_class, checkbox_class, url)
-        code_block = self.page.find_element(RegisterBlock)
+        current_scenario_name = request.node.name
+        self.scenario_id = current_scenario_name.split("[")[1].split("]")[0]
+
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4RegisterBlock)
+        else:
+            code_block = self.page.find_element(V5RegisterBlock)
+
+        if self.scenario_id == "v4":
+            self.disabled_code_block = self.page.find_element(V4DisabledBlock)
+        else:
+            self.disabled_code_block = self.page.find_element(V5DisabledBlock)
+
         self.form = code_block.find_element(self.form_class)
         self.form.scroll_to_view()
         self.sleep(5)
@@ -61,7 +81,7 @@ class TestForm(BaseUITest):
         self.page = page_class(self.app)
         self.page.sleep(5)
 
-    def test_input1(self):
+    def test_input(self):
         self.form.input("E-mail", "test")
 
     def test_text_area_input(self):
@@ -75,12 +95,11 @@ class TestForm(BaseUITest):
         self.form.direct_check("I have read the", True)
 
     def test_check(self):
-        code_block = self.page.find_element(DisabledBlock)
-        self.form = code_block.find_element(self.form_class)
+        self.form = self.disabled_code_block.find_element(self.form_class)
         self.form.scroll_to_view()
         self.sleep(5)
 
-        checkbox = code_block.find_element_by_label(
+        checkbox = self.disabled_code_block.find_element_by_label(
             self.checkbox_class, "Form disabled"
         )
         checkbox.scroll_to_view()
@@ -90,12 +109,11 @@ class TestForm(BaseUITest):
         self.form.check("Checkbox", True)
 
     def test_switch(self):
-        code_block = self.page.find_element(DisabledBlock)
-        self.form = code_block.find_element(self.form_class)
+        self.form = self.disabled_code_block.find_element(self.form_class)
         self.form.scroll_to_view()
         self.sleep(5)
 
-        checkbox = code_block.find_element_by_label(
+        checkbox = self.disabled_code_block.find_element_by_label(
             self.checkbox_class, "Form disabled"
         )
         checkbox.scroll_to_view()
@@ -105,8 +123,7 @@ class TestForm(BaseUITest):
         self.form.switch("Switch", True)
 
     def test_find_element_by_form_item_label(self):
-        code_block = self.page.find_element(DisabledBlock)
-        self.form = code_block.find_element(self.form_class)
+        self.form = self.disabled_code_block.find_element(self.form_class)
         self.form.scroll_to_view()
         self.sleep(5)
 
@@ -117,8 +134,7 @@ class TestForm(BaseUITest):
         assert checkbox is not None
 
     def test_is_form_item_present(self):
-        code_block = self.page.find_element(DisabledBlock)
-        self.form = code_block.find_element(self.form_class)
+        self.form = self.disabled_code_block.find_element(self.form_class)
         self.form.scroll_to_view()
         self.sleep(5)
 

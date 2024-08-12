@@ -27,8 +27,12 @@ scenario2 = (
 )
 
 
-class BasicTableCodeBlock(Element):
+class V4BasicTableCodeBlock(Element):
     XPATH_CURRENT = '//section[contains(@id, "components-table-demo-basic")]'
+
+
+class V5BasicTableCodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "table-demo-basic")]'
 
 
 @handle_ui_error()
@@ -40,7 +44,8 @@ class TestRow(BaseUITest):
     table_class = None
 
     @pytest.fixture(autouse=True)
-    def setup_method_test(self, page_class, table_class, url):
+    def setup_method_test(self, request, page_class, table_class, url):
+        self.scenario_id = request.node.name.split("[")[1].split("]")[0]
         self.prepare(page_class, table_class, url)
 
     def prepare(self, page_class, table_class, url):
@@ -50,7 +55,11 @@ class TestRow(BaseUITest):
         self.page = page_class(self.app)
         self.page.sleep(3)
 
-        code_block = self.page.find_element(BasicTableCodeBlock)
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4BasicTableCodeBlock)
+        else:
+            code_block = self.page.find_element(V5BasicTableCodeBlock)
+
         code_block.scroll_to_view()
         self.page.sleep(3)
 

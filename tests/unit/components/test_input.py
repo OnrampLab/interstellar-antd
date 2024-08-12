@@ -27,8 +27,12 @@ scenario2 = (
 )
 
 
-class PrefixAndSuffixCodeBlock(Element):
+class V4PrefixAndSuffixCodeBlock(Element):
     XPATH_CURRENT = '//section[contains(@id, "components-input-demo-presuffix")]'
+
+
+class V5PrefixAndSuffixCodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "input-demo-presuffix")]'
 
 
 @handle_ui_error()
@@ -38,7 +42,8 @@ class TestInput(BaseUITest):
     input = None
 
     @pytest.fixture(autouse=True)
-    def setup_method_test(self, page_class, input_class, url):
+    def setup_method_test(self, request, page_class, input_class, url):
+        self.scenario_id = request.node.name.split("[")[1].split("]")[0]
         self.prepare(page_class, input_class, url)
 
     def prepare(self, page_class, input_class, url):
@@ -64,7 +69,10 @@ class TestInput(BaseUITest):
         assert new_text == "ABCDEF"
 
     def test_enabled(self):
-        code_block = self.page.find_element(PrefixAndSuffixCodeBlock)
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4PrefixAndSuffixCodeBlock)
+        else:
+            code_block = self.page.find_element(V5PrefixAndSuffixCodeBlock)
         inputs = code_block.find_elements(self.input_class)
         self.input = inputs[2]
         self.input.scroll_to_view()

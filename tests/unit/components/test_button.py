@@ -27,8 +27,12 @@ scenario2 = (
 )
 
 
-class CodeBlock(Element):
+class V4CodeBlock(Element):
     XPATH_CURRENT = '//section[contains(@id, "components-button-demo-disabled")]'
+
+
+class V5CodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "button-demo-disabled")]'
 
 
 @handle_ui_error()
@@ -39,7 +43,9 @@ class TestButton(BaseUITest):
     button_class = None
 
     @pytest.fixture(autouse=True)
-    def setup_method_test(self, page_class, button_class, url):
+    def setup_method_test(self, request, page_class, button_class, url):
+        self.scenario_id = request.node.name.split("[")[1].split("]")[0]
+
         self.button_class = button_class
         self.prepare(page_class, url)
 
@@ -56,7 +62,10 @@ class TestButton(BaseUITest):
         self.button.click()
 
     def test_enabled(self):
-        code_block = self.page.find_element(CodeBlock)
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4CodeBlock)
+        else:
+            code_block = self.page.find_element(V5CodeBlock)
         self.button = code_block.find_element_by_label(self.button_class, "disabled")
         self.button.scroll_to_view()
         self.button.sleep(3)

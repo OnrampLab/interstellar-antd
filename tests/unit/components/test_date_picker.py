@@ -29,14 +29,22 @@ scenario2 = (
 )
 
 
-class BasicPickerBlock(Element):
+class V4BasicPickerBlock(Element):
     XPATH_CURRENT = '//section[contains(@id, "components-date-picker-demo-basic")]'
 
 
-class RangePickerBlock(Element):
+class V5BasicPickerBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "date-picker-demo-basic")]'
+
+
+class V4RangePickerBlock(Element):
     XPATH_CURRENT = (
         '//section[contains(@id, "components-date-picker-demo-range-picker")]'
     )
+
+
+class V5RangePickerBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "date-picker-demo-range-picker")]'
 
 
 @handle_ui_error()
@@ -46,7 +54,8 @@ class TestDatePicker(BaseUITest):
     date_picker_class = None
 
     @pytest.fixture(autouse=True)
-    def setup_method_test(self, page_class, date_picker_class, url):
+    def setup_method_test(self, request, page_class, date_picker_class, url):
+        self.scenario_id = request.node.name.split("[")[1].split("]")[0]
         self.prepare(page_class, date_picker_class, url)
 
     def prepare(self, page_class, date_picker_class, url):
@@ -54,9 +63,13 @@ class TestDatePicker(BaseUITest):
 
         self.date_picker_class = date_picker_class
         self.page = page_class(self.app)
+        self.page.sleep(3)
 
     def test_pick_single_date(self):
-        code_block = self.page.find_element(BasicPickerBlock)
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4BasicPickerBlock)
+        else:
+            code_block = self.page.find_element(V5BasicPickerBlock)
 
         date_picker = code_block.find_element(self.date_picker_class)
         from_date = date(2024, 5, 17)
@@ -66,7 +79,11 @@ class TestDatePicker(BaseUITest):
         assert date_picker.get_basic_date_value() == "2024-05-17"
 
     def test_pick_date_range_for_date_only(self):
-        code_block = self.page.find_element(RangePickerBlock)
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4RangePickerBlock)
+        else:
+            code_block = self.page.find_element(V5RangePickerBlock)
+
         date_picker = code_block.find_element(self.date_picker_class)
 
         from_date = date(2024, 5, 17)
@@ -77,7 +94,11 @@ class TestDatePicker(BaseUITest):
         assert date_picker.get_date_range_values() == ["2024-05-17", "2024-05-24"]
 
     def test_pick_date_range_with_time(self):
-        code_block = self.page.find_element(RangePickerBlock)
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4RangePickerBlock)
+        else:
+            code_block = self.page.find_element(V5RangePickerBlock)
+
         date_pickers = code_block.find_elements(self.date_picker_class)
         date_picker = date_pickers[1]
 

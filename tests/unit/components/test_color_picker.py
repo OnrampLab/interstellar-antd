@@ -18,11 +18,11 @@ scenario2 = (
 
 
 class BasicUsageBlock(Element):
-    XPATH_CURRENT = '//section[contains(@id, "components-color-picker-demo-base")]'
+    XPATH_CURRENT = '//section[contains(@id, "color-picker-demo-base")]'
 
 
 class DisabledBlock(Element):
-    XPATH_CURRENT = '//section[@id="components-color-picker-demo-disabled"]'
+    XPATH_CURRENT = '//section[contains(@id, "color-picker-demo-disabled")]'
 
 
 @handle_ui_error()

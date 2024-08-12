@@ -27,8 +27,12 @@ scenario2 = (
 )
 
 
-class AvatarBlock(Element):
+class V4AvatarBlock(Element):
     XPATH_CURRENT = '//section[contains(@id, "components-upload-demo-avatar")]'
+
+
+class V5AvatarBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "upload-demo-avatar")]'
 
 
 @handle_ui_error()
@@ -38,7 +42,8 @@ class TestUpload(BaseUITest):
     upload = None
 
     @pytest.fixture(autouse=True)
-    def setup_method_test(self, page_class, upload_class, url):
+    def setup_method_test(self, request, page_class, upload_class, url):
+        self.scenario_id = request.node.name.split("[")[1].split("]")[0]
         self.prepare(page_class, upload_class, url)
 
     def prepare(self, page_class, upload_class, url):
@@ -52,7 +57,10 @@ class TestUpload(BaseUITest):
         assert self.upload is not None
 
     def test_enabled(self):
-        code_block = self.page.find_element(AvatarBlock)
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4AvatarBlock)
+        else:
+            code_block = self.page.find_element(V5AvatarBlock)
         self.upload = code_block.find_element(self.upload_class)
         self.upload.scroll_to_view()
         self.upload.sleep(3)

@@ -27,8 +27,12 @@ scenario2 = (
 )
 
 
-class CodeBlock(Element):
+class V4CodeBlock(Element):
     XPATH_CURRENT = '//section[@id="components-radio-demo-radiobutton"]'
+
+
+class V5CodeBlock(Element):
+    XPATH_CURRENT = '//section[@id="radio-demo-radiobutton"]'
 
 
 @handle_ui_error()
@@ -38,7 +42,8 @@ class TestRadioGroup(BaseUITest):
     radio_group_class = None
 
     @pytest.fixture(autouse=True)
-    def setup_method_test(self, page_class, radio_group_class, url):
+    def setup_method_test(self, request, page_class, radio_group_class, url):
+        self.scenario_id = request.node.name.split("[")[1].split("]")[0]
         self.prepare(page_class, radio_group_class, url)
 
     def prepare(self, page_class, radio_group_class, url):
@@ -48,7 +53,11 @@ class TestRadioGroup(BaseUITest):
         self.page = page_class(self.app)
         self.page.sleep(5)
 
-        code_block = self.page.find_element(CodeBlock)
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4CodeBlock)
+        else:
+            code_block = self.page.find_element(V5CodeBlock)
+
         self.radio_groups = code_block.find_elements(self.radio_group_class)
 
     def test_select(self):

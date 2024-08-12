@@ -27,8 +27,12 @@ scenario2 = (
 )
 
 
-class CodeBlock(Element):
+class V4CodeBlock(Element):
     XPATH_CURRENT = '//section[@id="components-collapse-demo-basic"]'
+
+
+class V5CodeBlock(Element):
+    XPATH_CURRENT = '//section[@id="collapse-demo-basic"]'
 
 
 @handle_ui_error()
@@ -38,7 +42,8 @@ class TestCollapse(BaseUITest):
     collapse_class = None
 
     @pytest.fixture(autouse=True)
-    def setup_method_test(self, page_class, collapse_class, url):
+    def setup_method_test(self, request, page_class, collapse_class, url):
+        self.scenario_id = request.node.name.split("[")[1].split("]")[0]
         self.prepare(page_class, collapse_class, url)
 
     def prepare(self, page_class, collapse_class, url):
@@ -49,7 +54,10 @@ class TestCollapse(BaseUITest):
         self.page.sleep(3)
 
     def test_collapse(self):
-        code_block = self.page.find_element(CodeBlock)
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4CodeBlock)
+        else:
+            code_block = self.page.find_element(V5CodeBlock)
         collapse = code_block.find_element(self.collapse_class)
         items = collapse.get_items()
         item = items[0]
@@ -68,7 +76,10 @@ class TestCollapse(BaseUITest):
         assert not item.is_expanded()
 
     def test_find_item(self):
-        code_block = self.page.find_element(CodeBlock)
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4CodeBlock)
+        else:
+            code_block = self.page.find_element(V5CodeBlock)
         collapse = code_block.find_element(self.collapse_class)
         item = collapse.find_item("This is panel header 1")
 

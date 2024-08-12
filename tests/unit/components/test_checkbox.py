@@ -27,8 +27,12 @@ scenario2 = (
 )
 
 
-class CodeBlock(Element):
+class V4CodeBlock(Element):
     XPATH_CURRENT = '//section[contains(@id, "components-checkbox-demo-disabled")]'
+
+
+class V5CodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "checkbox-demo-disabled")]'
 
 
 @handle_ui_error()
@@ -38,7 +42,8 @@ class TestCheckbox(BaseUITest):
     checkbox_class = None
 
     @pytest.fixture(autouse=True)
-    def setup_method_test(self, page_class, checkbox_class, url):
+    def setup_method_test(self, request, page_class, checkbox_class, url):
+        self.scenario_id = request.node.name.split("[")[1].split("]")[0]
         self.prepare(page_class, checkbox_class, url)
 
     def prepare(self, page_class, checkbox_class, url):
@@ -57,7 +62,10 @@ class TestCheckbox(BaseUITest):
         self.checkbox.check(True)
 
     def test_enabled(self):
-        code_block = self.page.find_element(CodeBlock)
+        if self.scenario_id == "v4":
+            code_block = self.page.find_element(V4CodeBlock)
+        else:
+            code_block = self.page.find_element(V5CodeBlock)
         self.checkbox = code_block.find_element(self.checkbox_class)
         self.checkbox.scroll_to_view()
         self.checkbox.sleep(3)
