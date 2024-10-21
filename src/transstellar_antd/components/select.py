@@ -21,10 +21,6 @@ class Select(Element):
 
         self.click()
 
-        if self.SHOULD_DOUBLE_CLICK:
-            # NOTE: Only v5 has this issue
-            self.click()
-
         select_item = self.find_global_dom_element_by_xpath(
             self.XPATH_TARGET_ITEM_TEMPLATE.format(title=text)
         )

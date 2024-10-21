@@ -89,6 +89,8 @@ class TestForm(BaseUITest):
         self.screenshot("textarea.png")
 
     def test_select(self):
+        # NOTE: For some reason it will have issue without clicking first
+        self.form.click()
         self.form.select("Gender", "Male")
 
     def direct_check(self):
