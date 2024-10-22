@@ -1,5 +1,5 @@
 import pytest
-from transstellar.framework import BaseUITest, handle_ui_error
+from transstellar.framework import BaseUITest, Element, handle_ui_error
 
 from tests.pytest_generate_tests_helper import pytest_generate_tests_helper
 from transstellar_antd import Anchor
@@ -52,11 +52,11 @@ class TestPopover(BaseUITest):
         self.page.sleep(5)
 
     def test_click_popover(self):
-        button = self.page.find_element_by_label(self.button_class, "Hover me")
+        button = self.page.find_element_by_label(self.button_class, "Click me")
         button.click()
 
         self.page.sleep(3)
 
-        popover = self.page.find_global_element(self.popover_class)
+        popover = self.page.find_element(self.popover_class)
 
         assert popover.is_opened()

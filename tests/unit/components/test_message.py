@@ -45,7 +45,7 @@ class TestMessage(BaseUITest):
         self.app.driver.get(url)
 
         self.page = page_class(self.app)
-        self.page.sleep(6)
+        self.page.sleep(7)
 
         button = self.page.find_element_by_label(button_class, "Display normal message")
         button.click()

@@ -28,6 +28,10 @@ scenario2 = (
 
 
 class CodeBlock(Element):
+    XPATH_CURRENT = '//section[contains(@id, "switch-demo-basic")]'
+
+
+class DisabledCodeBlock(Element):
     XPATH_CURRENT = '//section[contains(@id, "switch-demo-disabled")]'
 
 
@@ -46,15 +50,16 @@ class TestSwitch(BaseUITest):
 
         self.switch_class = switch_class
         self.page = page_class(self.app)
-        self.page.sleep(5)
+        self.page.sleep(7)
 
     def test_switch(self):
-        switch = self.page.find_element(self.switch_class)
+        code_block = self.page.find_element(CodeBlock)
+        switch = code_block.find_element(self.switch_class)
 
         switch.switch(False)
 
     def test_enabled(self):
-        code_block = self.page.find_element(CodeBlock)
+        code_block = self.page.find_element(DisabledCodeBlock)
         self.switch = code_block.find_element(self.switch_class)
         self.switch.scroll_to_view()
         self.switch.sleep(3)

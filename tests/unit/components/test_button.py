@@ -28,11 +28,11 @@ scenario2 = (
 
 
 class V4CodeBlock(Element):
-    XPATH_CURRENT = '//section[contains(@id, "components-button-demo-disabled")]'
+    XPATH_CURRENT = '//section[@id="components-button-demo-disabled"]'
 
 
 class V5CodeBlock(Element):
-    XPATH_CURRENT = '//section[contains(@id, "button-demo-disabled")]'
+    XPATH_CURRENT = '//section[@id="button-demo-disabled"]'
 
 
 @handle_ui_error()
@@ -66,7 +66,9 @@ class TestButton(BaseUITest):
             code_block = self.page.find_element(V4CodeBlock)
         else:
             code_block = self.page.find_element(V5CodeBlock)
-        self.button = code_block.find_element_by_label(self.button_class, "disabled")
+        self.button = code_block.find_element_by_fuzzy_label(
+            self.button_class, "disabled"
+        )
         self.button.scroll_to_view()
         self.button.sleep(3)
 
